@@ -92,8 +92,8 @@
 
 ```java
 /*
-	定义成抽象类，里面有三个方法，service方法会判断请求方式，然后根据请求方式调用doGet或doPost方法
-	doGet和doPost是抽象方法，所有Servlet的实例都需要实现这两个方法；
+定义成抽象类，里面有三个方法，service方法会判断请求方式，然后根据请求方式调用doGet或doPost方法
+doGet和doPost是抽象方法，所有Servlet的实例都需要实现这两个方法；
 */
 public abstract class Servlet {
     public void service(Request request, Response response) {
