@@ -17,18 +17,20 @@
 
 * 请求报文也是类似key : value键值对的形式
 
-| key                | value                                                        |
-| ------------------ | ------------------------------------------------------------ |
-| Host               | 本次请求的主机路径                                           |
-| User-Agent         | 告诉服务端本次请求客户端所在的平台以及本次请求采用的浏览器类型 |
-| Accept             | 指定客户端能够接收的数据类型                                 |
-| Accept-Language    | 告诉服务端，浏览器可以识别的语言种类                         |
-| Accept-Encoding    | 告诉服务端，浏览器可以接收哪些类型压缩格式数据               |
-| 等字段 . . . . . . | 参考图解http                                                 |
+  | Key                | value                                                        |
+  | ------------------ | ------------------------------------------------------------ |
+  | Host               | 本次请求的主机路径                                           |
+  | User-Agent         | 告诉服务端本次请求客户端所在的平台以及本次请求采用的浏览器类型 |
+  | Accept             | 指定客户端能够接收的数据类型                                 |
+  | Accept-Language    | 告诉服务端，浏览器可以识别的语言种类                         |
+  | Accept-Encoding    | 告诉服务端，浏览器可以接收哪些类型压缩格式数据               |
+  | 等字段 . . . . . . | 参考图解http                                                 |
+
+  
 
 * 请求百度的请求报文（chrome浏览器截图）
 
-![](../img/手写简易web服务器/请求报文.png)
+  <img src="../img/手写简易web服务器/请求报文.png"></img>
 
 
 
@@ -36,19 +38,21 @@
 
 ### 响应报文
 
-|                                    |                      |
-| ---------------------------------- | -------------------- |
-| 响应协议版本号 状态码 是否成功(ok) |                      |
-| Date                               | 响应时间             |
-| Content-Type                       | 响应的数据类型       |
-| Content-Encoding                   | 响应采用的压缩格式   |
-| Content-Length                     | 响应的数据长度       |
-| **空行**                           | **一定要记得空一行** |
-| 响应数据                           | 响应数据             |
+| Key                                | Value                  |
+| ---------------------------------- | ---------------------- |
+| 响应协议版本号 状态码 是否成功(ok) | 响应协议版本号是必须的 |
+| Date                               | 响应时间               |
+| Content-Type                       | 响应的数据类型         |
+| Content-Encoding                   | 响应采用的压缩格式     |
+| Content-Length                     | 响应的数据长度         |
+| **空行**                           | **一定要记得空一行**   |
+| 响应数据                           |                        |
 
 * 请求百度的响应报文
 
-![](../img/手写简易web服务器/响应报文.png)
+  <img src="../img/手写简易web服务器/响应报文.png"></img>
+  
+  
 
 
 
@@ -72,15 +76,17 @@
 
   
 
-#### 流程图
+### 流程图
 
-![](../img/手写简易web服务器/实现流程图.png)
-
-
+<img src="../img/手写简易web服务器/实现流程图.png"></img>
 
 
 
-### Coding
+
+
+### 开始Coding
+
+
 
 **Servlet**
 
@@ -106,6 +112,8 @@ public abstract class Servlet {
 
 
 
+
+
 **Reqeust**
 
 ```java
@@ -123,6 +131,8 @@ public class Request {
     }
 }
 ```
+
+
 
 
 
@@ -144,6 +154,8 @@ public class Response {
     }
 }
 ```
+
+
 
 
 
@@ -187,6 +199,8 @@ public class ServletConfig {
 
 
 
+
+
 **Properties配置文件**
 
 ```properties
@@ -194,6 +208,8 @@ public class ServletConfig {
 url=/index
 class=com.kingwait.instance.IndexServlet
 ```
+
+
 
 
 
@@ -258,6 +274,8 @@ public class Server {
 
 
 
+
+
 **IndexServlet实例对象**
 
 ```java
@@ -286,9 +304,13 @@ public class IndexServlet extends Servlet {
 
 
 
+
+
 **运行结果**
 
-![](../img/手写简易web服务器/运行结果.png)
+<img src="../img/手写简易web服务器/运行结果.png"></img>
+
+
 
 
 
