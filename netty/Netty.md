@@ -30,20 +30,37 @@
 
 * 关系说明
   * 每个Channel都对应一个Buffer
-
-  * 一个Selector对应一个线程，一个线程可以对应多个Channel（Channel可以理解为一个连接)
-
+* 一个Selector对应一个线程，一个线程可以对应多个Channel（Channel可以理解为一个连接)
   * Channel要注册到Selector中，该图中，有三个Channel注册到了Selector中
-
-  * 程序切换到哪个Channel是由事件决定的，Event是一个重要的概念
-
+* 程序切换到哪个Channel是由事件决定的，Event是一个重要的概念
   * Selector会根据不同的事件，在各个通道上切换
-
-  * Buffer就是一个内存块，底层是一个数组
-
+* Buffer就是一个内存块，底层是一个数组
   * 数据的读取写入是通过Buffer的，而在BIO中都是通过输入流或者输出流（单向）。但是NIO的Buffer是可以读，也可以写的，需要通过flip方法切换。
+* Channel是双向的，可以返回底层操作系统的情况。（Buffer是双向的，Channel也是双向的）
+  
 
-  * Channel是双向的，可以返回底层操作系统的情况。（Buffer是双向的，Channel也是双向的）
 
-    
+
+
+
+**Buffer**
+
+
+
+
+
+
+
+**Channel**
+
+* NIO的通道类似于流，但有些区别如下：
+  * 通道可以同时进行读写，而流只能读或者只能写
+  * 通道可以实现异步读写数据
+  * 通道可以从缓冲读数据，也可以写数据到缓冲，通道是双向的，而流只是单向的
+
+
+
+
+
+
 
