@@ -54,3 +54,43 @@ public int findNthDigit(int n) {
     }
 ```
 
+​	
+
+#### 48
+
+最长不包含重复字符的子字符串
+
+**题解：**
+
+滑动窗口，其实滑动窗口就是定义两个指针i，j；一定条件下i++，另一条件下j++；
+
+* j指针往右遍历；用一个set集合保存序列
+* 当j指针指向的元素不存在于set集合中，就一直往set集合中添加元素；同时更新maxLength的值，maxLength就是存在过的最长子序列；
+* 如果set集合中存在j指向的元素，就删除i指针指向的元素。直到set集合不存在j指向的元素；
+
+
+
+```java
+public int lengthOfLongestSubstring(String s) {
+    int i = 0, j = 0;
+    char[] arr = s.toCharArray();
+    Set<Character> set = new HashSet<>();
+    int maxLength = 0;
+
+    while(j < arr.length) {
+        if(!set.contains(arr[j])) {
+            set.add(arr[j]);
+            maxLength = Math.max(maxLength, set.size());
+        } else {
+            while(set.contains(arr[j])) {
+                set.remove(arr[i]);
+                i++;
+            }
+            set.add(arr[j]);
+        }
+        j++;
+    }
+    return maxLength;
+}
+```
+
