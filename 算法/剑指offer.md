@@ -35,8 +35,6 @@ public int sumNums(int n) {
 
 ![](../img/剑指offer/44.png)
 
-
-
 ```java
 public int findNthDigit(int n) {
         if(n == 0) return 0;
@@ -67,8 +65,6 @@ public int findNthDigit(int n) {
 * j指针往右遍历；用一个set集合保存序列
 * 当j指针指向的元素不存在于set集合中，就一直往set集合中添加元素；同时更新maxLength的值，maxLength就是存在过的最长子序列；
 * 如果set集合中存在j指向的元素，就删除i指针指向的元素。直到set集合不存在j指向的元素；
-
-
 
 ```java
 public int lengthOfLongestSubstring(String s) {
