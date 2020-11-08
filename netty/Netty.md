@@ -8,7 +8,7 @@
 
 * Netty本质是一个NIO框架，适用于服务器通讯相关的多种应用场景。
 
-  ​	
+  ​			
 
 ### NIO
 
@@ -53,20 +53,16 @@
 > - 而NIO是可以双向的。通俗的理解，NIO的操作就是通过Channel怼到一个文件上，而Channel就相当于一条管道。每个管道都需要有一个运输工来搬运数据，这个运输工就是Buffer。
 > - Selector就是用来管理这些Channel的管理器。
 
-
-
-
-
-​	
-
-### 三大组件
-
-
+​				
 
 ​			
 
+### 三大组件
+
 #### Buffer
 
+>**Buffer是什么**
+>
 >* 在Java NIO中，Buffer就是负责数据的存取。缓冲区本质上就是数组，用于存储不同类型的数据。所以就衍生出了不同类型的缓冲区。Java中提供除了boolean以外的所有基本类型的缓冲区。如：ByteBuffer、CharBuffer、ShortBuffer、IntBuffer等。
 >
 >* NIO中所有的XXXBuffer都继承自Buffer，而Buffer类中有几个属性需要我们熟知
@@ -100,7 +96,6 @@
 >    System.out.println(buf.limit());
 >    System.out.println(buf.capacity());
 >    // 打印：pos_0、limit_10、capacity_10；默认初始化值
->
 >    buf.put("fffff".getBytes());			// 向缓冲区中写入五个字符
 >    System.out.println(buf.position());				
 >    System.out.println(buf.limit());
@@ -134,8 +129,6 @@
 >
 >  ​		
 >
->  ​	
->
 >**直接缓冲区与非直接缓冲区**
 >
 >* 非直接缓冲区：
@@ -150,48 +143,147 @@
 >
 >* 直接缓冲区
 >
->  * 无需拷贝内核空间中文件数据的缓冲区 
+>  * 无需拷贝内核空间中文件数据的缓冲区 ，将缓冲区建立在物理内存中。提高了效率
 >
->  * 通过allocateDirect() 方法分配的缓冲区，将缓冲区建立在物理内存中。提高了效率
+>  * 分配直接缓冲区的方式，直接缓冲区的方式只有ByteBuffer支持
+>
+>    * 通过  allocateDirect()  方法分配
+>    * 通过  channel实例.map()  方法分配
 >
 >    <img src="../img/netty/直接缓冲区.png" style="zoom: 50%;" />
->
->    
-
-
-
-
-
-
-
-
 
 ​				
 
-#### Channel
+#### Channel				
 
->* Channel即通道，可以通俗的理解为打开的连接
->* 通道类似于流，但通道本身不能直接访问数据，Channel只能与Buffer进行交互
->* 通道和流的区别如下
->  * 通道可以同时进行读写，而流只能读或者只能写
->  * 通道可以实现异步读写数据
->  * 通道可以从缓冲读数据，也可以写数据到缓冲，通道是双向的，而流只是单向的
->* read，从通道读取数据并发到缓冲区中
->* write，把缓冲区的数据写到通道中
+>**Channel是什么**
 >
+>Channel即通道，用于源节点和目标节点的连接，负责传输缓冲区中的数据，Channel本身不存储数据，因此需要配合缓冲区进行传输。可以通俗的把通道理解为打开的连接。
 >
+>通道类似于流，但通道本身不能直接访问数据，Channel只能与Buffer进行交互，Buffer才能用于存取数据。通道和流的区别如下
+>
+>* 通道是双向的，可以读写，可以从缓冲读数据或写数据到缓冲；而流只能读或者只能写，是单向的
+>
+>* 通道可以实现异步读写数据
+>
+>  ​	
+>
+>**通道常用的类**
+>
+>* Channel（interface），以下四个是实现类
+>
+>  * FileChannel：用于**操作本地**文件的IO通道
+>  * SocketChannel：用于**TCP协议**的网络IO通道
+>  * ServerSocketChannel：用于**TCP协议**的网络IO通道
+>  * DatagramChannel：用于**UDP协议**的网络IO通道
+>
+>  ​		
+>
+>**获取通道的方式**
+>
+>* Java对支持通道的类提供了getChannel() 方法。例如：FileInputStream，ServerSocket，DatagramSocket 等；
+>
+>  ```java
+>  FileInputStream fis = new FileInputStream("1.txt");
+>  FileChannel channel = fis.getChannel();
+>  ```
+>
+>* 针对各个通道提供的静态方法 open() 。例如：FileChannel.open(xxx)、SocketChannel.open(xxx) 等；
+>
+>  ```java
+>  // 读模式，第二个参数是枚举值，还有其他值：READ、WRITE、APPEND等
+>  FileChannel channel = FileChannel.open(Paths.get("1.txt"), StandardOpenOption.READ);  
+>  ```
+>
+>* 通过 Files 工具类获取通道。例如 Files.newByteChannel() 等；
+>
+>  ​			
+>
+>**小案例1，使用非直接缓冲拷贝文件**
+>
+>```java
+>// 利用通道完成文件复制
+>@Test
+>public void test1() {
+>    FileInputStream fis = null;
+>    FileOutputStream fos = null;
+>
+>    FileChannel inChannel = null;
+>    FileChannel outChannel = null;
+>    try{
+>        fis = new FileInputStream("D:/file1.txt");
+>        fos = new FileOutputStream("D:/file2.txt");
+>
+>        inChannel = fis.getChannel();
+>        outChannel = fos.getChannel();
+>        ByteBuffer buf = ByteBuffer.allocate(1024);
+>
+>        // read，从通道读取数据并发到缓冲区中
+>		// write，把缓冲区的数据写到通道中
+>        while(inChannel.read(buf) != -1) {
+>            buf.flip();     // 缓冲区切换到读取模式
+>            outChannel.write(buf);
+>            buf.clear();    // 清空缓冲区，方便下一次操作
+>        }
+>    } catch(IOException e) {
+>        if(inChannel != null)
+>            try{ inChannel.close(); }
+>        catch(IOException ee) { ee.printStackTrace(); }
+>
+>        if(outChannel != null)
+>            try{outChannel.close();}
+>        catch(IOException ee) { ee.printStackTrace(); }
+>
+>        if(fis != null)
+>            try{ fis.close(); }
+>        catch(IOException ee) { ee.printStackTrace(); }
+>
+>        if(fos != null)
+>            try{ fos.close(); }
+>        catch(IOException ee) { ee.printStackTrace(); }
+>    }
+>}
+>```
+>
+>​				
+>
+>**小案例2，使用直接缓冲拷贝文件**
+>
+>```java
+>// 利用直接缓冲区完成文件的复制（内存映射文件）
+>@Test
+>public void test2() throws Exception {
+>    FileChannel inChannel = FileChannel.open(Paths.get("D:/file1.txt"),
+>                                             StandardOpenOption.READ   // 只读模式
+>                                            );
+>    FileChannel outChannel = FileChannel.open(Paths.get("D:/file1_cp.txt"), 
+>                                              StandardOpenOption.READ,       // 读模式
+>                                              StandardOpenOption.WRITE,      // 写模式
+>                                              StandardOpenOption.CREATE_NEW  // 如果没有文件，则创建一个文件
+>                                             );
+>
+>    // 分配内存直接映射文件
+>    MappedByteBuffer inMappedBuf = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, inChannel.size());
+>    MappedByteBuffer outMappedBuf = outChannel.map(FileChannel.MapMode.READ_WRITE, 0, inChannel.size());
+>
+>    // 直接对缓冲区进行数据读写操作
+>    byte[] dst = new byte[inMappedBuf.limit()];
+>    inMappedBuf.get(dst);       // 读数据
+>    outMappedBuf.put(dst);      // 写数据
+>}
+>```
+
+​				
+
+#### Selector	
+
+> **Selector是什么**
 
 ​			
 
-#### Selector
+​			
 
-​		
-
-​		
-
-​		
-
-​		
+​			
 
 ### 线程模型
 
