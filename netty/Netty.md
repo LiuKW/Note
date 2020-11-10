@@ -8,13 +8,15 @@
 
 * Netty本质是一个NIO框架，适用于服务器通讯相关的多种应用场景。
 
-  ​			
+  ​					
   
-  ​		
+  ​				
   
-  ​		
+  ​					
 
 ### NIO
+
+***
 
 > **NIO**
 >
@@ -59,17 +61,17 @@
 > - 而NIO是可以双向的。通俗的理解，NIO的操作就是通过Channel怼到一个文件上，而Channel就相当于一条管道。每个管道都需要有一个运输工来搬运数据，这个运输工就是Buffer。
 > - Selector就是用来管理这些Channel的管理器。
 
+***
+
 ​				
 
 ​			
 
-​		
+​				
 
 ### 三大组件
 
 ***
-
-
 
 #### Buffer
 
@@ -169,13 +171,15 @@
 >
 > <img src="../img/netty/直接缓冲区.png" style="zoom: 50%;" />
 
-​				
+***
+
+​					
 
 ​				
 
-​			
+#### Channel	
 
-#### Channel				
+***
 
 >**Channel是什么**
 >
@@ -449,13 +453,15 @@
 >
 >Java中的IO为了防止乱码，提供了Charset供我们认为的按照某种字符编码格式解码。用什么格式编码的就得用什么格式解码。
 
-​						
+***
 
-​			
+​				
 
 ​				
 
 #### Selector	
+
+***
 
 > **Selector是什么**
 >
@@ -565,7 +571,17 @@
 > }
 > ```
 >
-> 
+> ​					
+>
+> **Selector、SelectionKey、Channel之间的关系**
+>
+> Channel将其注册道Selector中，注册完成后会返回一个SelectionKey，这个SelectionKey会被Selector保存到一个集合中。
+>
+> Selector监听 ，返回有事件发生的通道个数，进而得到各个SelectionKey，再通过SelectionKey获取到Channel。
+>
+> 可以这么理解，Channel会有多个不同的事件，但是Channel本身没有办法表示事件的类型，所以就把Channel和SelectionKey绑定起来，通过SelectionKey绑定特定的事件，也能通过SelectionKey获得Channel。
+>
+> ​					
 >
 > **总结：**
 >
@@ -580,13 +596,15 @@
 > * 根据SelectionKey的不同事件类型，做出相应的处理
 > * 取消选择键
 
+***
+
 ​				
 
-​			
-
-​			
+​				
 
 #### 管道
+
+***
 
 > **管道是什么**
 >
@@ -625,27 +643,33 @@
 > // 将source管道和sink管道写到两个线程中，就可以实现线程间的通信了
 > ```
 
+***
+
 ​				
 
-​			
+​				
 
-​		
+​				
 
 ### 线程模型
 
-**Reactor线程模型**，也就是传统的网络IO模型，基于事件驱动，又叫做反应模型，分派模型，通知模型
+***
 
-Reactor的三种具体实现
+>**Reactor线程模型**，也就是传统的网络IO模型，基于事件驱动，又叫做反应模型，分派模型，通知模型
+>
+>
+>
+>Reactor的三种具体实现
+>
+>* 单Reactor单线程，一对一模型
+>  * 一个ServerSocket，接收了一个请求就处理这个请求。处理完之后，等待下一次
+>* 单Reactor多线程，一对多模型
+>  * 一个ServerSocket，接受了一个请求之后。创建一个线程，或者从线程池中拿到一个新的线程处理请求。
+>* 主从Reactor多线程，多对多模型
 
-* 单Reactor单线程
-  * 一个ServerSocket，接收了一个请求就处理这个请求。处理完之后，等待下一次
-* 单Reactor多线程
-  * 一个ServerSocket，接受了一个请求之后。创建一个线程，或者从线程池中拿到一个新的线程处理请求。
-* 主从Reactor多线程
+***
 
 
-
-![](../img/netty/reactor.png)
 
 
 
