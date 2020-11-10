@@ -79,24 +79,24 @@
 >
 >* NIO中所有的XXXBuffer都继承自Buffer，而Buffer类中有几个属性需要我们熟知
 >
-> ```java
-> // 标记，表示记录当前position的位置；通过mark()方法，将pos当前位置保存到mark中，调用reset()将pos指向mark保存的位置
-> private int mark = -1;			
-> 
-> // 位置，表示缓冲区中正在操作数据的位置
-> private int position = 0;		
-> 
-> // 界限，表示缓冲区中可以操作数据的大小。即，limit后的数据不能进行读写
-> private int limit;				
-> 
-> // 容量，表示缓冲区中最大存储数据的额容量。一旦声明不能改变
-> private int capacity;			
-> 
-> 
-> // 所以它们之间的关系应该是：0 <= mark <= position <= limit <= capacity
-> ```
+>```java
+>// 标记，表示记录当前position的位置；通过mark()方法，将pos当前位置保存到mark中，调用reset()将pos指向mark保存的位置
+>private int mark = -1;			
 >
-> 			
+>// 位置，表示缓冲区中正在操作数据的位置
+>private int position = 0;		
+>
+>// 界限，表示缓冲区中可以操作数据的大小。即，limit后的数据不能进行读写
+>private int limit;				
+>
+>// 容量，表示缓冲区中最大存储数据的额容量。一旦声明不能改变
+>private int capacity;			
+>
+>
+>// 所以它们之间的关系应该是：0 <= mark <= position <= limit <= capacity
+>```
+>
+>​			
 >
 >​			
 >
@@ -105,28 +105,28 @@
 >```java
 >@Test
 >public void test1() {
->   ByteBuffer buf = ByteBuffer.allocate(10);		// 创建一个10个字节大小的缓冲区
->   System.out.println(buf.position());				
->   System.out.println(buf.limit());
->   System.out.println(buf.capacity());
->   // 打印：pos_0、limit_10、capacity_10；默认初始化值
->   
->   buf.put("fffff".getBytes());			// 向缓冲区中写入五个字符
->   System.out.println(buf.position());				
->   System.out.println(buf.limit());
->   System.out.println(buf.capacity());
->   // 打印：pos_5、limit_10、capacity_10；
->   
->   
->   buf.flip();	// 反转缓冲区，将缓冲区置为读状态。缓冲区是双向的可读写，但是需要通过这个方法切换。相当于把pos指向数据头
->   
->   System.out.println(buf.position());				
->   System.out.println(buf.limit());
->   System.out.println(buf.capacity());
->   // 打印：pos_0、limit_5、capacity_10；
->   
->   // rewind();    // 重新读，也就是把pos指针重新指向到数据最开始的位置
->   // clear();		// 清空缓冲区，但实际上并没有真正清空，只是初始化一下pos、limit的位置。写的时候直接覆盖之前的数据
+>  ByteBuffer buf = ByteBuffer.allocate(10);		// 创建一个10个字节大小的缓冲区
+>  System.out.println(buf.position());				
+>  System.out.println(buf.limit());
+>  System.out.println(buf.capacity());
+>  // 打印：pos_0、limit_10、capacity_10；默认初始化值
+>  
+>  buf.put("fffff".getBytes());			// 向缓冲区中写入五个字符
+>  System.out.println(buf.position());				
+>  System.out.println(buf.limit());
+>  System.out.println(buf.capacity());
+>  // 打印：pos_5、limit_10、capacity_10；
+>  
+>  
+>  buf.flip();	// 反转缓冲区，将缓冲区置为读状态。缓冲区是双向的可读写，但是需要通过这个方法切换。相当于把pos指向数据头
+>  
+>  System.out.println(buf.position());				
+>  System.out.println(buf.limit());
+>  System.out.println(buf.capacity());
+>  // 打印：pos_0、limit_5、capacity_10；
+>  
+>  // rewind();    // 重新读，也就是把pos指针重新指向到数据最开始的位置
+>  // clear();		// 清空缓冲区，但实际上并没有真正清空，只是初始化一下pos、limit的位置。写的时候直接覆盖之前的数据
 >}
 >```
 >
@@ -142,7 +142,7 @@
 >
 >* **Buffer创建后，默认是写模式**
 >
->   ​		
+>  ​		
 >
 >​			
 >
@@ -150,23 +150,24 @@
 >
 >* 非直接缓冲区：
 >
->   * 需要拷贝内核空间中文件数据的缓冲区
+>  * 需要拷贝内核空间中文件数据的缓冲区
 >
->   * 通过allocate() 方法分配，将缓冲区建立在 JVM 的内存中
+>  * 通过allocate() 方法分配，将缓冲区建立在 JVM 的内存中
 >
->  <img src="../img/netty/非直接缓冲区.png" style="zoom: 50%;" />
+> <img src="../img/netty/非直接缓冲区.png" style="zoom: 50%;" />
 >
->  ​		
+> ​		
 >
 >* 直接缓冲区
 >
->   * 无需拷贝内核空间中文件数据的缓冲区 ，将缓冲区建立在物理内存中。提高了效率，但是直接内存不稳定，这里的不稳定是指直接缓冲交给操作系统管理，而操作系统什么时候刷盘，什么时候关闭直接缓冲，就不是JVM说了算了
+>  * 无需拷贝内核空间中文件数据的缓冲区 ，将缓冲区建立在物理内存中。提高了效率，但是直接内存不稳定，这里的不稳定是指直接缓冲交给操作系统管理，而操作系统什么时候刷盘，什么时候关闭直接缓冲，就不是JVM说了算了
 >
->   * 分配直接缓冲区的方式，直接缓冲区的方式只有ByteBuffer支持
->  * 通过  allocateDirect()  方法分配
->     * 通过  channel实例.map()  方法分配
+>  * 分配直接缓冲区的方式，直接缓冲区的方式只有ByteBuffer支持
+> * 分配直接缓冲区的方式
+>     * 通过  allocateDirect()  方法分配
+>    * 通过  channel实例.map()  方法分配
 >
->  <img src="../img/netty/直接缓冲区.png" style="zoom: 50%;" />
+> <img src="../img/netty/直接缓冲区.png" style="zoom: 50%;" />
 
 ​				
 
@@ -330,7 +331,7 @@
 > // transferFrom 和 transferTo 也是通过直接内存的方式
 > ```
 >
-> 				
+> ​				
 >
 >​					
 >
