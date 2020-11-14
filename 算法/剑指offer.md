@@ -99,3 +99,84 @@
 >```
 >
 
+​			
+
+​			
+
+**28**
+
+>判断二叉树是否对称
+>
+>**题解：**
+>
+>递归的写法，我们以两个节点举例。可以看看节点对称需要什么条件；
+>
+>* 这两个节点都为空，则肯定是对称的
+>
+>* 两个节点只有一个为空，则肯定不对称
+>
+>* 两个节点的值不相等，则肯定不对称；
+>
+>  ```java
+>  public boolean isSymmetric(TreeNode root) {
+>      
+>  }
+>  
+>  public boolean helper(TreeNode left, TreeNode right) {
+>      if(left == null && right == null) 
+>          return true;
+>      // 经过上面的if判断之后能保证，两个节点至少有一个不为空
+>      if(left == null ^ right == null)	// 异或
+>          return false;
+>      
+>      // 注意：这里一定只能判断两个节点是否不相等，不能判断是否相等，如果判断是相等的会阻止return里面的递归
+>      if(left.val != right.val) 
+>          return false;		
+>  
+>      return helper(root.left, root.right) && helper(root.right, root.left);
+>  }
+>  ```
+>
+>  ​	
+>
+>BFS
+>
+>* BFS的代码看起来回更加苏福
+>
+>  ```java
+>  public boolean isSymmetric(TreeNode root) {
+>      if(root == null) return true;
+>      Queue<TreeNode> queue = new LinkedList<>();
+>      queue.add(root.left);
+>      queue.add(root.right);
+>      while(!queue.isEmpty()) {
+>          TreeNode left = queue.poll();
+>          TreeNode right = queue.poll();
+>          if(left == null && right == null)
+>              continue;
+>          if(left == null ^ right == null)
+>              return false;
+>          if(left.val != right.val)
+>              return false;
+>          queue.add(left.left);
+>          queue.add(right.right);
+>          queue.add(left.right);
+>          queue.add(right.left);
+>      }
+>      return true;
+>  }
+>  ```
+>
+>  
+
+
+
+
+
+
+
+
+
+**没搞懂的题：**
+
+108、617
