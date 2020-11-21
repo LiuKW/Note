@@ -2,7 +2,7 @@
 
 mongodb的bin目录可以看到这个目录下面有很多mongodb自带的工具。例如最熟悉的mongod，mongo，这两个是用于启动mongodb服务器和客户端的。还有其他的一些工具，例如mongodump和mongorestore，这两个是用于备份和恢复数据库的。
 
-<img src= "../img/Mongodb性能排查/1.png"/>
+![](../img/Mongodb性能排查/1.png)
 
 ​					
 
@@ -22,7 +22,7 @@ mongodb的bin目录可以看到这个目录下面有很多mongodb自带的工具
 
 > 我们今天要给大家介绍的一个工具是mongostat，这是一个可以查看mongodb当前工作状态的工具。我们执行mongostat -h hostname:port就能够进入mongostat的监测界面。
 >
-> <img src= "../img/Mongodb性能排查/2.png"/>
+> ![](../img/Mongodb性能排查/2.png)
 >
 > ​				
 >
@@ -68,7 +68,7 @@ mongodb的bin目录可以看到这个目录下面有很多mongodb自带的工具
 >
 > 同样的，执行mongotop -h hostname:port
 >
-> <img src= "../img/Mongodb性能排查/3.png"/>
+> ![](../img/Mongodb性能排查/3.png)
 >
 > 通过这个工具，我们也可以快速地定位出现性能问题的位置。
 
@@ -84,7 +84,7 @@ mongodb的bin目录可以看到这个目录下面有很多mongodb自带的工具
 >
 > 例如：我们查询一个没有索引的字段，EstateName字段没有索引。
 >
-> <img src= "../img/Mongodb性能排查/4.png"/>
+> ![](../img/Mongodb性能排查/4.png)
 >
 > 我们主要查看红线标注的参数，如上图：
 >
@@ -102,7 +102,7 @@ mongodb的bin目录可以看到这个目录下面有很多mongodb自带的工具
 >
 > 例如：我们查询有索引的字段。查询一个AreaId，我已经在AreaId上创建了索引
 >
-> <img src= "../img/Mongodb性能排查/5.png"/>
+> ![](../img/Mongodb性能排查/5.png)
 >
 > 
 >
