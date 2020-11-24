@@ -42,7 +42,7 @@
 >
 > **NIO三大核心组件关系图**
 >
-> ![](../img/netty/Channel-Buffer-Selector关系图.png)
+> <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124232850.png" style="zoom:67%;" />
 >
 > **关系说明**
 >
@@ -134,7 +134,7 @@
 >
 >**上述案例示意图**
 >
-><img src="../img/netty/pos_lim_cap.png" style="zoom: 67%;" />
+><img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124232936.png" style="zoom:67%;" />
 >
 >**小结：**
 >
@@ -156,7 +156,7 @@
 >
 >  * 通过allocate() 方法分配，将缓冲区建立在 JVM 的内存中
 >
-> <img src="../img/netty/非直接缓冲区.png" style="zoom: 50%;" />
+> <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233005.png" style="zoom: 50%;" />
 >
 > ​		
 >
@@ -169,7 +169,7 @@
 >     * 通过  allocateDirect()  方法分配
 >    * 通过  channel实例.map()  方法分配
 >
-> <img src="../img/netty/直接缓冲区.png" style="zoom: 50%;" />
+> <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233057.png" style="zoom: 50%;" />
 
 ***
 
@@ -343,36 +343,40 @@
 >
 >* 分散读取是指从Channel中读取的数据分散到多个Buffer中。并且按照Buffer的顺序依次填满各个Buffer
 >
->  <img src="../img/netty/分散读取.png" style="zoom: 50%;" />
+>    <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233729.png" style="zoom: 50%;" />
 >
->* 聚集写入相当于分散读取的反向操作，就是将多个Buffer中的数据聚集到Channel中。并且按照Buffer的顺序依次写入各个Buffer
+>  
 >
->  <img src="../img/netty/聚集写入.png" style="zoom: 50%;" />
+> * 聚集写入相当于分散读取的反向操作，就是将多个Buffer中的数据聚集到Channel中。并且按照Buffer的顺序依次写入各个Buffer
 >
+>  <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233809.png" style="zoom: 50%;" />
+
+
+
 >**小案例：分散读取**
 >
 >```java
 >// 分散读取
 >@Test
 >public void test5() throws Exception {
->    RandomAccessFile raf2 = new RandomAccessFile("d:/file2.txt", "rw");
+>   RandomAccessFile raf2 = new RandomAccessFile("d:/file2.txt", "rw");
 >
->    // 1、获取通道
->    FileChannel channel = raf2.getChannel();
->
->    // 2、分配指定大小缓冲区
+>   // 1、获取通道
+>   FileChannel channel = raf2.getChannel();
+> 
+>   // 2、分配指定大小缓冲区
 >    ByteBuffer buf1 = ByteBuffer.allocate(10);
->    ByteBuffer buf2 = ByteBuffer.allocate(1024);
+>   ByteBuffer buf2 = ByteBuffer.allocate(1024);
 >
->    // 3、聚集写入
->    ByteBuffer[] bufs = {buf1, buf2};
->    channel.write(bufs);
->
+>   // 3、聚集写入
+>   ByteBuffer[] bufs = {buf1, buf2};
+>   channel.write(bufs);
+> 
 >    raf2.close();
->}
->```
+> }
+> ```
 >
->​			
+> ​			
 >
 >**小案例：聚集写入**
 >
@@ -381,22 +385,22 @@
 >@Test
 >public void test5() throws Exception {
 >    RandomAccessFile raf2 = new RandomAccessFile("file2.txt", "rw");
->
+> 
 >    // 1、获取通道
 >    FileChannel channel = raf2.getChannel();
 >
->    // 2、分配指定大小缓冲区
->    ByteBuffer buf1 = ByteBuffer.allocate(10);
+>   // 2、分配指定大小缓冲区
+>   ByteBuffer buf1 = ByteBuffer.allocate(10);
 >    ByteBuffer buf2 = ByteBuffer.allocate(1024);
->
+> 
 >    // 3、聚集写入
 >    ByteBuffer[] bufs = {buf1, buf2};
->    channel.write(bufs);
+>   channel.write(bufs);
 >
->    raf2.close();
->}
+>   raf2.close();
+> }
 >```
->
+> 
 >**小结：**
 >
 >简单说分散读取和聚集写入就是操作Buffer数组，之前只是操作一个Buffer，现在是把多个Buffer拼成一个Buffer数组，再操作Buffer数组
@@ -404,31 +408,31 @@
 >​				
 >
 >​				
+> 
+> **防止乱码，字符集 Charset **
 >
->**防止乱码，字符集 Charset **
->
->* 编码就是 **字符串** 转换成 **字节数组** 的过程
->
->* 解码就是 **字节数组** 转换成 **字符串** 的过程
->
->```java
+> * 编码就是 **字符串** 转换成 **字节数组** 的过程
+> 
+> * 解码就是 **字节数组** 转换成 **字符串** 的过程
+> 
+> ```java
 >@Test
->public void test6() throws Exception {
+> public void test6() throws Exception {
 >    // 查看支持的字符集
 >    Map<String, Charset> map = Charset.availableCharsets();
->    Set<Map.Entry<String, Charset>> set = map.entrySet();
+>   Set<Map.Entry<String, Charset>> set = map.entrySet();
 >    for (Map.Entry<String, Charset> entry : set)
->        System.out.println(entry.getKey() + "=" + entry.getValue());
->}
->
->
->@Test
->public void test7() throws Exception {
+>       System.out.println(entry.getKey() + "=" + entry.getValue());
+> }
+> 
+> 
+> @Test
+> public void test7() throws Exception {
 >    // 获取一个Charset
 >    Charset cs = Charset.forName("GBK");
->		
+> 		
 >    // 获取编码器
->    CharsetEncoder ce = cs.newEncoder();
+>   CharsetEncoder ce = cs.newEncoder();
 >    
 >    // 获取解码器
 >    CharsetDecoder cd = cs.newDecoder();
@@ -442,10 +446,10 @@
 >    for (int i = 0; i < bBuf.limit(); i++)
 >        System.out.println(bBuf.get());       
 >
->    // 解码
->    bBuf.flip();
->    CharBuffer cBuf2 = cd.decode(bBuf);   // 解码
->    System.out.println(cBuf2.toString());
+>   // 解码
+>   bBuf.flip();
+>   CharBuffer cBuf2 = cd.decode(bBuf);   // 解码
+>   System.out.println(cBuf2.toString());
 >}
 >```
 >
@@ -613,7 +617,7 @@
 >
 > * NIO管道是两个线程之间的单向数据连接。Pipe有一个 **source通道** 和一个 **sink通道** 。数据会被写到sink通道，从source通道读取
 >
-> <img src="../img/netty/管道.png" style="zoom: 50%;" />
+> <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233637.png" style="zoom: 40%;" />
 >
 > **管道小案例**
 >

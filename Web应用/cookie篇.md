@@ -60,7 +60,7 @@ public String GetCookie(HttpServletResponse response)
 
 **打开Chrome的调试工具，访问localhost:8080/cookie，在调试工具中查看http携带的报文数据**
 
-![](../img/cookie/1.png)
+![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124232402.png)
 
 * 在**Response Cookies(响应报文的cookies字段)**可以看到，客户端返回了一个cookies。
 

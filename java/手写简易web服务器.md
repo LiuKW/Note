@@ -39,7 +39,7 @@
 >
 > **请求百度的请求报文（chrome浏览器截图）**
 >
-> <img src="../img/手写简易web服务器/请求报文.png"></img>
+> ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234726.png)
 >
 > ​				
 >
@@ -59,7 +59,7 @@
 >
 > **请求百度的响应报文（chrome浏览器截图）**
 >
-> <img src="../img/手写简易web服务器/响应报文.png"></img>
+> ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234751.png)
 
 ****
 
@@ -89,7 +89,7 @@
 >
 >#### 流程图
 >
-><img src="../img/手写简易web服务器/实现流程图.png"></img>
+>![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234825.png)
 
 ***
 
@@ -308,7 +308,7 @@
 >
 > **运行结果**	
 >
-> <img src="../img/手写简易web服务器/运行结果.png" style="zoom: 67%;" ></img>
+> ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234901.png)
 
 ***
 

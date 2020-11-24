@@ -38,7 +38,7 @@
 >
 >* 每 digit 位数的起始数字（即：1, 10, 100，⋯），记为 start
 >
->![](../img/剑指offer/44.png)
+><img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234643.png" style="zoom:67%;" />
 >
 >```java
 >public int findNthDigit(int n) {

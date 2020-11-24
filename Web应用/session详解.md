@@ -8,7 +8,7 @@
 
   ​		
 
-  ![](../img/session/1.png)
+  <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234107.png" style="zoom:67%;" />
 
   ​		
 
@@ -20,7 +20,7 @@
 
   ​		
 
-  ![](../img/session/2.png)
+  ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234207.png)
 
   ​		
 
@@ -55,7 +55,7 @@ public void JidAndSid(HttpServletRequest request)
 
 以下是两次访问的截图，可以看到在控制台每次打印的JSESSIONID那个cookie的值和SESSIONID的值是一样的
 
-![](../img/session/3.png)
+![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234234.png)
 
 **小结：**服务器就是根据sessionid和JSESSION来匹配的，浏览器把带有JSESSIONID的cookie带回给服务器，服务器解析这个cookie，与sessionid匹配。
 
@@ -144,7 +144,7 @@ public String getSessionData(HttpSession session)
 
 **浏览器显示的内容**
 
-![](../img/session/4.png)
+![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234300.png)
 
 ​	
 
