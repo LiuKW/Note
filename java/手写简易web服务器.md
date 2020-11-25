@@ -14,8 +14,6 @@
 
 #### Http协议
 
-****
-
 > **了解http协议**
 >
 > * web服务器与客户端是使用http通信的，首先我们得了解http协议的报文格式，里面什么字段做了什么事。http分为请求报文和响应报文。一次请求必然对应一次响应。这些报文有严格的格式要求。参考《图解http》
@@ -61,15 +59,11 @@
 >
 > ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234751.png)
 
-****
-
 
 
 
 
 #### 服务器架构和流程图
-
-***
 
 >大家应该都学过Java Web，我们可以参考Java Web中的一些标准，使用Servlet处理请求，不同的url对应不同的Servelt实例。
 >
@@ -91,8 +85,6 @@
 >
 >![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234825.png)
 
-***
-
 ​				
 
 ​				
@@ -100,8 +92,6 @@
 ​			
 
 #### 开始Coding
-
-****
 
 > **Servlet**
 >
@@ -309,8 +299,6 @@
 > **运行结果**	
 >
 > ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234901.png)
-
-***
 
 ​			
 

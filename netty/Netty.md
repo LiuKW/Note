@@ -16,8 +16,6 @@
 
 ### NIO
 
-***
-
 > **NIO**
 >
 > * Java NIO 全称 java non-blocking IO，是指 JDK 提供的新API。从 JDK 1.4 开始，Java提供了一系列改进的输入 / 输出的新特性，被统称为NIO（即New IO) ，是同步非阻塞的。
@@ -61,8 +59,6 @@
 > - 而NIO是可以双向的。通俗的理解，NIO的操作就是通过Channel怼到一个文件上，而Channel就相当于一条管道。每个管道都需要有一个运输工来搬运数据，这个运输工就是Buffer。
 > - Selector就是用来管理这些Channel的管理器。
 
-***
-
 ​				
 
 ​			
@@ -71,7 +67,7 @@
 
 ### 三大组件
 
-***
+​			
 
 #### Buffer
 
@@ -171,15 +167,11 @@
 >
 > <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233057.png" style="zoom: 50%;" />
 
-***
-
 ​					
 
 ​				
 
 #### Channel	
-
-***
 
 >**Channel是什么**
 >
@@ -343,13 +335,13 @@
 >
 >* 分散读取是指从Channel中读取的数据分散到多个Buffer中。并且按照Buffer的顺序依次填满各个Buffer
 >
->    <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233729.png" style="zoom: 50%;" />
+>    <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124235758.png" style="zoom: 50%;" />
 >
 >  
 >
 > * 聚集写入相当于分散读取的反向操作，就是将多个Buffer中的数据聚集到Channel中。并且按照Buffer的顺序依次写入各个Buffer
 >
->  <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124233809.png" style="zoom: 50%;" />
+>   <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124235827.png" style="zoom:55%;" />
 
 
 
@@ -457,15 +449,11 @@
 >
 >Java中的IO为了防止乱码，提供了Charset供我们认为的按照某种字符编码格式解码。用什么格式编码的就得用什么格式解码。
 
-***
-
 ​				
 
 ​				
 
 #### Selector	
-
-***
 
 > **Selector是什么**
 >
@@ -600,15 +588,11 @@
 > * 根据SelectionKey的不同事件类型，做出相应的处理
 > * 取消选择键
 
-***
-
 ​				
 
 ​				
 
 #### 管道
-
-***
 
 > **管道是什么**
 >
@@ -647,8 +631,6 @@
 > // 将source管道和sink管道写到两个线程中，就可以实现线程间的通信了
 > ```
 
-***
-
 ​				
 
 ​				
@@ -656,8 +638,6 @@
 ​				
 
 ### 线程模型
-
-***
 
 >**Reactor线程模型**，也就是传统的网络IO模型，基于事件驱动，又叫做反应模型，分派模型，通知模型
 >
@@ -670,8 +650,6 @@
 >* 单Reactor多线程，一对多模型
 >  * 一个ServerSocket，接受了一个请求之后。创建一个线程，或者从线程池中拿到一个新的线程处理请求。
 >* 主从Reactor多线程，多对多模型
-
-***
 
 
 
