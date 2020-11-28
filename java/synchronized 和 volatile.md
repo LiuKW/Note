@@ -59,9 +59,9 @@ synchronized是Java的一个关键字，可以修饰方法，或者修饰一个�
 >
 > * 下图是上面那段代码的反汇编中testC方法的截图
 >
->   ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201124234413.png)
+>   <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201125221434.png" style="zoom: 80%;" />
 >
->   
+>   ​		
 >
 > **小结一下：**
 >
