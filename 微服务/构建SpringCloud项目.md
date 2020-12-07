@@ -75,11 +75,10 @@
           </dependency>
       </dependencies>
   </dependencyManagement>
-  
   ```
-
-  ​			
-
+  
+​			
+  
 * **建立其他子模块**
 
   示例
