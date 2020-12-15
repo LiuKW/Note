@@ -210,6 +210,18 @@ Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，特点�
 > <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201215002714.png" style="zoom:67%;" />
 >
 > 
+>
+> **配置文件**
+>
+> 拦截请求路径带有.css、.js、.jpg等的uri，路径匹配成功到root指定的目录位置寻找资源，再拼接上uri中的资源目录找到文件。 
+>
+> <img src="https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201215155954.png" style="zoom: 80%;" />
+>
+> **例如**：
+>
+> 当我们访问：http://192.168.203/img/1.jpg 的地址时，就会去 /usr/local/source + /img 的目录位置寻找1.jpg文件
+>
+> ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201215160018.png)
 
    #### 反向代理1
 
