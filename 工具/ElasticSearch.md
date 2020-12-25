@@ -1,6 +1,4 @@
-# ElasticSearch
-
-​			
+# ElasticSearch			
 
 [TOC]
 
