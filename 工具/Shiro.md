@@ -6,11 +6,40 @@
 
 ***
 
+#### Shiro简介
+
 > Apache Shiro是一个强大且易用的Java安全框架,执行身份验证、授权、密码和会话管理。使用Shiro的易于理解的API,您可以快速、轻松地获得任何应用程序,从最小的移动应用程序到最大的网络和企业应用程序。
 >
 > **官方文档**：https://shiro.apache.org/reference.html
 >
 > https://www.w3cschool.cn/shiro/oibf1ifh.html
+
+​					
+
+#### Shiro架构图
+
+> ![](https://kingwait-note.oss-cn-chengdu.aliyuncs.com/20201226023352.png)
+
+​				
+
+#### Shiro核心组件
+
+> * **Subject**：
+>
+>   表示待认证和授权的用户
+>
+> * **Security Manager**：
+>
+>   它是Shiro框架的核心，Shiro就是通过Security Manager来进行内部实例的管理，并通过它来提供安全管理的各种服务。
+>
+>   * Authenticator，认证器
+>   * Anthorizer，授权器
+>   * SessionManager，会话管理器
+>   * CacheManager，缓存管理器
+>
+> * **Realm**：
+>
+>   相当于Shiro进行认证和授权的数据源，充当了Shiro与安全数据之间的“桥梁”或者“连接器”。也就是说，当对用户进行认证(登录)和授权（访问控制）验证时，Shiro会用应用配置的Realm中查找用户及其权限信息。
 
 ​			
 
