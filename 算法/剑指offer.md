@@ -133,7 +133,7 @@
 >      if(left.val != right.val) 
 >          return false;		
 >  
->      return helper(root.left, root.right) && helper(root.right, root.left);
+>      return helper(left.left, right.right) && helper(left.right, right.left);
 >  }
 >  ```
 >
